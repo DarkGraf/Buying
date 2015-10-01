@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="" title="Карта сайта"  description="">
+    <siteMapNode url="~/Default.aspx" title="Список покупок"  description="Список покупок">
+      <siteMapNode url="~/AddingBuying.aspx" title="Добавить покупку" description="Добавить покупку" />
+    </siteMapNode>
+    <siteMapNode url="~/GoodsDirectory.aspx" title="Справочник товаров"  description="Справочник товаров">
+      <siteMapNode url="~/AddingGoods.aspx" title="Добавление товара" description="Добавление товара" />
+      <siteMapNode url="~/EditingGoods.aspx" title="Редактирование товара" description="Редактирование товара" />
+      <siteMapNode url="~/DeletingGoods.aspx" title="Удаление товара" description="Удаление товара" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

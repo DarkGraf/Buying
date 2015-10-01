@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+  <asp:ContentPlaceHolder ID="head" runat="server">
+  </asp:ContentPlaceHolder>
+</head>
+<body>
+  <form id="form1" runat="server">
+    <asp:Label ID="lblTitle" runat="server" Font-Size="XX-Large"
+      Text="Покупка товаров"></asp:Label>
+    <hr />
+
+    <table>
+      <tr><td valign="top">
+        <asp:TreeView ID="navigationTree" runat="server" DataSourceID="SiteMapDataSource" ImageSet="BulletedList2" ShowExpandCollapse="False">
+          <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+          <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="5px" NodeSpacing="0px" VerticalPadding="0px" />
+          <ParentNodeStyle Font-Bold="False" />
+          <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+        </asp:TreeView>
+        <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
+      </td><td bgcolor="gray">
+      </td><td valign="top">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+      </td></tr>
+    </table>
+  </form>
+</body>
+</html>
