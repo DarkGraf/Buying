@@ -3,27 +3,28 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
+using Service;
+
 public partial class AddingBuyingPage : System.Web.UI.Page
 {
   protected void Page_Load(object sender, EventArgs e)
   {
     if (!IsPostBack)
     {
-      SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["GoodsBuyingConnectionString"].ConnectionString);
-      string commandText = "select Id, Name from Goods order by Name";
-      DataTable table = new DataTable();
-      SqlDataAdapter adapter = new SqlDataAdapter(commandText, connection);
-      adapter.Fill(table);
-
-      lstGood.DataSource = table;
-      lstGood.DataTextField = "Name";
-      lstGood.DataValueField = "Id";
-      lstGood.DataBind();
+      using (BuyingClient client = BuyingClient.Create())
+      {
+        var goods = client.GetGoods();
+        lstGood.DataSource = goods;
+        lstGood.DataTextField = "Name";
+        lstGood.DataValueField = "Id";
+        lstGood.DataBind();
+      }
     }
   }
+
   protected void btnOk_Click(object sender, EventArgs e)
   {
-    SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["GoodsBuyingConnectionString"].ConnectionString);
+    /*SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["GoodsBuyingConnectionString"].ConnectionString);
     SqlCommand command = connection.CreateCommand();
     command.CommandText =
 @"declare @CommentId uniqueidentifier
@@ -51,9 +52,22 @@ end";
     finally
     {
       connection.Close();
+    }*/
+
+    using (BuyingClient client = BuyingClient.Create())
+    {
+      BuyingAddDataContract buyingInfo = new BuyingAddDataContract
+      {
+        Goods = Guid.Parse(lstGood.SelectedValue),
+        Priority = int.Parse(txtPriority.Text),
+        Comment = txtComment.Text
+      };
+      client.AddBuying(buyingInfo);
     }
+
     Response.Redirect("Default.aspx");
   }
+
   protected void btnCancel_Click(object sender, EventArgs e)
   {
     Response.Redirect("Default.aspx");
