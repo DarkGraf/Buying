@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.ServiceModel.Web;
 
 using DataLayer;
 
@@ -9,6 +10,7 @@ namespace Service
   {
     #region IBuyingService
 
+    [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "/GetBuyings")]
     public BuyingDataContract[] GetBuyings()
     {
       #region Sql-Запрос.
@@ -33,10 +35,10 @@ namespace Service
                                        select new BuyingDataContract
                                        {
                                          Id = buying.Id,
-                                         Goods = goods.Name,
+                                         Goods = goods.Name.TrimEnd(),
                                          Priority = buying.Priority,
                                          InputDate = buying.InputDate,
-                                         Comment = subComment.Description
+                                         Comment = subComment.Description.TrimEnd()
                                        }).ToArray();
         return result;
       }
@@ -132,7 +134,7 @@ namespace Service
                                      select new GoodsDataContract
                                      {
                                        Id = g.Id,
-                                       Name = g.Name
+                                       Name = g.Name.TrimEnd()
                                      }).ToArray();
 
         return goods;
@@ -160,7 +162,7 @@ namespace Service
                                      select new GoodsDataContract
                                      {
                                        Id = g.Id,
-                                       Name = g.Name
+                                       Name = g.Name.TrimEnd()
                                      }).ToArray();
 
         return goods;

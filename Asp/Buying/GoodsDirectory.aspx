@@ -5,8 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
   <asp:GridView ID="gridGoods" runat="server" AutoGenerateColumns="False" DataKeyNames="Id">
     <Columns>
-      <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-      <asp:TemplateField>
+      <asp:BoundField DataField="Name" HeaderText="Наименование" SortExpression="Name" />
+      <asp:TemplateField HeaderText="Удаление">
         <ItemTemplate>
           <asp:LinkButton ID="btnDelete" Text="Удалить" runat="server" OnClick="btnDelete_Click" />
         </ItemTemplate>
