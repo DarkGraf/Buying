@@ -22,6 +22,17 @@ end
 if (select object_definition(default_object_id) as definition
    from sys.columns where name = 'Id' and object_id = object_id('Comments')) is null
 begin
-  alter table Comments add default 'newid()' for Id
-  select 'Установка для поля Id таблицы Comments значения по уполчанию.'
+  alter table Comments add default newid() for Id
+  print 'Установка для поля Id таблицы Comments значения по уполчанию.'
+end
+
+-- ***************************************************
+-- Установка для поля Id таблицы Goods значения
+-- по уполчанию.
+-- ***************************************************
+if (select object_definition(default_object_id) as definition
+   from sys.columns where name = 'Id' and object_id = object_id('Goods')) is null
+begin
+  alter table Goods add default newid() for Id
+  print 'Установка для поля Id таблицы Goods значения по уполчанию.'
 end

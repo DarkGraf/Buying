@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
+
+using Service;
 
 public partial class AddingGoodsPage : System.Web.UI.Page
 {
@@ -12,23 +11,12 @@ public partial class AddingGoodsPage : System.Web.UI.Page
 
   protected void btnOk_Click(object sender, EventArgs e)
   {
-    SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["GoodsBuyingConnectionString"].ConnectionString);
-    SqlCommand command = connection.CreateCommand();
-    command.CommandText =
-@"if not exists(select 1 from Goods where Name = @Name)
-begin
-  insert into Goods (Id, Name) values (newid(), @Name)
-end";
-    command.Parameters.Add("Name", SqlDbType.NChar, 60).Value = txtGood.Text;
-    connection.Open();
-    try
+    using (BuyingClient client = BuyingClient.Create())
     {
-      command.ExecuteNonQuery();
+      GoodsAddDataContract goods = new GoodsAddDataContract { Name = txtGood.Text };
+      client.AddGoods(goods);
     }
-    finally
-    {
-      connection.Close();
-    }
+
     Response.Redirect("GoodsDirectory.aspx");
   }
 

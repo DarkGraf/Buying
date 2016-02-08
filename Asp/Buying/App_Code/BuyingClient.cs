@@ -22,6 +22,11 @@ namespace Service
       return Channel.GetBuyings();
     }
 
+    public GoodsDataContract[] GetNotUsedGoods()
+    {
+      return Channel.GetNotUsedGoods();
+    }
+
     public void AddBuying(BuyingAddDataContract buyingInfo)
     {
       Channel.AddBuying(buyingInfo);
@@ -35,6 +40,21 @@ namespace Service
     public GoodsDataContract[] GetGoods()
     {
       return Channel.GetGoods();
+    }
+
+    public void AddGoods(GoodsAddDataContract goodsInfo)
+    {
+      Channel.AddGoods(goodsInfo);
+    }
+
+    public void DeleteGoods(Guid id)
+    {
+      Channel.DeleteGoods(id);
+    }
+
+    public void ChangeGoods(GoodsChangeDataContract goodsInfo)
+    {
+      Channel.ChangeGoods(goodsInfo);
     }
 
     #endregion

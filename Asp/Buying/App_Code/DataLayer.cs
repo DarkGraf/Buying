@@ -20,14 +20,16 @@ namespace DataLayer
 
   class Comments
   {
-    //[Key]
-    //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
     public string Description { get; set; }
   }
 
   class Goods
   {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
     public string Name { get; set; }
   }
