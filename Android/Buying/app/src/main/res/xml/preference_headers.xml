@@ -1,0 +1,5 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+    <header android:fragment="com.tsv.buying.Preference.UserPreferenceFragment"
+        android:title="Settings"
+        android:summary="Buying Refresh Settings" />
+</preference-headers>

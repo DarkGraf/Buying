@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Preference.FragmentPreferenceActivity" />
+
+        <provider
+            android:authorities="com.tsv.buyingprovider"
+            android:name=".BuyingProvider" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
