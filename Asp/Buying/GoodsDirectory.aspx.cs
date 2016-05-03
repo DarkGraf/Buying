@@ -3,12 +3,14 @@ using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using Service;
+using ASP;
+using Buying.Bll.Dto;
+using Buying.Bll.Service;
 
 public partial class Default2 : System.Web.UI.Page
 {
-  GoodsDataContract[] usedGoods;
-  GoodsDataContract[] notUsedGoods;
+  GoodsDto[] usedGoods;
+  GoodsDto[] notUsedGoods;
 
   protected void Page_Load(object sender, EventArgs e)
   {
@@ -21,7 +23,7 @@ public partial class Default2 : System.Web.UI.Page
     base.OnInit(e);
     gridGoods.RowDataBound += gridGoods_RowDataBound;
 
-    using (BuyingClient client = BuyingClient.Create())
+    using (BuyingClient client = BuyingClient.Create(Global.Address))
     {
       // Запомним неиспользуемые товары.
       // Они нужны в gridGoods_RowDataBound для отображения
@@ -38,7 +40,7 @@ public partial class Default2 : System.Web.UI.Page
     if (e.Row.RowType != DataControlRowType.DataRow)
       return;
 
-    GoodsDataContract goods = e.Row.DataItem as GoodsDataContract;
+    GoodsDto goods = e.Row.DataItem as GoodsDto;
 
     // Отключим кнопки удаления товаров, для которых это запрещено.
     LinkButton btn = (LinkButton)e.Row.FindControl("btnDelete");
@@ -49,7 +51,7 @@ public partial class Default2 : System.Web.UI.Page
   {
     GridViewRow row = (GridViewRow)((Control)sender).NamingContainer;
     DataKey key = gridGoods.DataKeys[row.DataItemIndex];
-    using (BuyingClient client = BuyingClient.Create())
+    using (BuyingClient client = BuyingClient.Create(Global.Address))
     {
       client.DeleteGoods((Guid)key.Value);
     }

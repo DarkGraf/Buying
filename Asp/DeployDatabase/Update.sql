@@ -36,3 +36,17 @@ begin
   alter table Goods add default newid() for Id
   print 'Установка для поля Id таблицы Goods значения по уполчанию.'
 end
+
+-- ***************************************************
+-- Создание таблицы констант.
+-- ***************************************************
+if (select top 1 TABLE_NAME from INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'Constants') is null
+begin
+  create table Constants (
+    Id uniqueidentifier primary key,
+	Name varchar(20),
+	Value varchar(20))
+
+	alter table Constants add default newid() for Id
+	print 'Создание таблицы констант.'
+end

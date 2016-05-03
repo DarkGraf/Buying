@@ -1,4 +1,13 @@
+Asp/.vs
 Asp/Buying.v12.suo
-Asp/Buying/GoodsBuying.mdf
-Asp/Buying/GoodsBuying_log.ldf
+Asp/Buying.Bll/bin
+Asp/Buying.Bll/obj
+Asp/Buying.Dal/bin
+Asp/Buying.Dal/obj
+Asp/Buying/Bin/Buying.Bll.dll
+Asp/Buying/Bin/Buying.Bll.pdb
+Asp/Buying/Bin/Buying.Dal.dll
+Asp/Buying/Bin/Buying.Dal.pdb
+
+
 Backup
