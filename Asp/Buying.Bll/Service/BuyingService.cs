@@ -138,11 +138,12 @@ namespace Buying.Bll.Service
                 uow.Save();
 
                 // Удаление из таблицы комментариев.
-                var deleteComments = from c in uow.Comments.GetAll()
+                // Используем неотложенную операцию.
+                var deleteComments = (from c in uow.Comments.GetAll()
                                      join b in uow.Buyings.GetAll() on c.Id equals b.Comment into leftBuyings
                                      from subBuying in leftBuyings.DefaultIfEmpty()
                                      where subBuying == null
-                                     select c.Id;
+                                     select c.Id).ToArray();
                 if (deleteComments.Count() > 0)
                 {
                     foreach (var c in deleteComments)
